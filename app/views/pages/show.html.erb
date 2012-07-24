@@ -1,0 +1,8 @@
+<%= render :partial=>"head" %>
+<% if @page.closed? %>
+<div class="notice">
+<h4>Draft</h4>
+</div>
+<% end %>
+<%= to_html @content %>
+<%= render :partial=>"foot" %>

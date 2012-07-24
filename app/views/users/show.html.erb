@@ -1,0 +1,57 @@
+<div class="yui-main">
+<div class="yui-b">
+	<div class="with-padding darkgrey" style="font-size: 2em; color: #FFF;">
+		<h1><%=h @user.login.titleize %></h1>
+	</div>
+</div><!-- end top mast -->
+
+<div class="yui-b with-padding byline">
+	<div class="simple-nav">
+		<ul>
+			<li><strong>User:</strong> <%=h @user.login %></li>
+			<li><strong>Joined on:</strong> <%= @user.created_at.to_s(:long) unless @user.created_at.nil? %></li>
+			<% if logged_in? and current_user.is_admin? %>
+			<li><strong>Subscriber?</strong> <%= "Yes" if @user.subscriber? %></li>
+			<li><%= link_to "Edit", edit_user_path(@user) %></li>
+			<% end %>
+		</ul>
+	</div>
+</div>
+
+<div class="yui-b">
+	<div id="content-wrapper" class="with-padding grey">
+		<div id="content">
+    		<table>
+				<thead>
+				  <tr>
+					<th colspan="6">
+						Dynasties
+					</th>
+				  </tr>
+			      <tr class="labels">
+			            <td>School</td>
+			            <td>First Year</td>
+			            <td>Last Year</td>
+			            <td>Record</td>
+			            <td>Last Updated (Apprx)</td>
+			            <td>Created On (Apprx)</td>
+			      </tr>
+				</thead>
+				<tbody>
+				<% @user.dynasties.each do |dynasty| %>
+				<tr class="<%= cycle("even","odd") %>">
+				<td><%= link_to(dynasty.team.name+'&nbsp;'+dynasty.team.mascot,url_for_dynasty(dynasty,dynasty.seasons.first)) %></td>
+				<td><%= dynasty.first_season.year.to_s unless dynasty.first_season.nil? %></td>
+				<td><%= dynasty.most_recent_season.year.to_s unless dynasty.first_season.nil? %></td>
+				<td><%= dynasty.overall_record %></td>
+				<td><%= dynasty.updated_at.to_s(:long) %></td>
+				<td><%= dynasty.created_at.to_s(:long) %></td>
+				</tr>
+				<% end %>
+				</tbody>
+			</table>
+    	</div><!-- end content -->
+    </div>
+
+</div>
+</div>

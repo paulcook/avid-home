@@ -1,0 +1,16 @@
+<h3><%= link_to "View All Tickets",tickets_path %></h3>
+<table>
+<thead>
+<tr><th colspan="3">Recent Tickets</th></tr>
+<tr><td>Status</td><td>Type</td><td>Title</td></tr>
+</thead>
+<tbody>
+<% for ticket in @recent_tickets do %>
+<tr class="<%= ticket.ticket_type %>">
+    <td><%= ticket.status %></td>
+    <td><%= ticket.ticket_type %></td>
+    <td><%= link_to ticket.title, ticket_path(ticket) %></td>
+</tr>
+<% end %>
+</tbody>
+</table>

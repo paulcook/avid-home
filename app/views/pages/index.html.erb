@@ -1,0 +1,52 @@
+<%= stylesheet_link_tag 'wiki' %>
+
+<center><h1>Welcome to the Avid Wiki</h1></center>
+<br/>
+<% if logged_in? and (current_user.is_editor? or current_user.is_administrator?) %>
+<table align="CENTER" border="1" cellspacing="0" cellpadding="8" width="400">
+  <tr class="pageheader">
+    <td align="center" valign="middle"><strong><em>Create a New Page</em></strong></td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle">
+        <% form_tag pages_path do %>
+            <br />
+            <input type="text" name="f">
+            &nbsp;
+            <input type="submit" name="Submit" value="Create">
+        <% end %>
+    </td>
+  </tr>
+</table>
+
+<br/>
+<center><strong>- or -</strong></center>
+<br/>
+<% end %>
+<table align="CENTER" border="1" cellspacing="0" cellpadding="8" width="400">
+  <tr class="pageheader">
+    <td align="center" valign="middle"><strong><em>Choose an Existing Page</em></strong></td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle">
+          <form name="form_existing" method="get">
+            <br />
+            <select id="page-select" name="f">
+				  <option></option>
+                  <% @pagelist.each do |page| %>
+                    <% unless page.closed? and (!logged_in? or (logged_in? and !current_user.is_wiki_editor?)) %><option<%= ' style="color:red"' if page.closed? %>><%= page.name %></option><% end %>
+                  <% end %>
+            </select>
+          </form>      
+      </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#page-select').bind('change',function(ev){
+			var page = $(ev.target).children("option:selected").val();
+			Avid.gotoUrl("/pages/"+page);
+		});
+	});
+</script>

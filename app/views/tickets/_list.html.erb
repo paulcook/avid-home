@@ -1,0 +1,27 @@
+<table>
+        <thead>
+        <tr>
+        <td>Status</td><td>Title</td><td>Created On</td><td>Created By</td><td>Comments</td>
+        </tr>
+        </thead>
+        <tbody>
+        <% for ticket in tickets %>
+        <tr class="<%= cycle("even","odd") %> <%= ticket.ticket_type %>">
+            <td><%= ticket.status %></td>
+            <td><%= link_to ticket.title,ticket_path(ticket) %></td>
+            <td><%= ticket.created_at.to_formatted_s(:long) %></td>
+            <td><%= ticket.user.username %></td>
+            <td><%= ticket.comments.size %></td>
+        </tr>
+        <% end %>
+        </tbody>
+        <tfoot>
+        <tr><td colspan="5">
+        Key: <span style="color: red;">Bug</span> <span style="color:green;">Feature</span>
+        <br /><strong>new:</strong> just created<br />
+              <strong>open:</strong> read by developer<br />
+              <strong>in_development:</strong> being worked on<br />
+              <strong>resolved/closed:</strong> feature or bug is completed (may not be live on site)
+        </td></tr>
+        </tfoot>
+</table>

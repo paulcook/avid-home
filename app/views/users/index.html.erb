@@ -1,0 +1,28 @@
+
+<% form_tag search_users_path do %>
+<table>
+<tr><td><%= will_paginate @users %></td><td>Login:<%= text_field_tag "login","",:size=>15 %><%= submit_tag "Find" %></td><td>Email:<%= text_field_tag "email", "",:size=>15 %><%= submit_tag "Find" %></td></tr>
+</table>
+<% end %>
+<table>
+  <thead>
+  <tr>
+	<th colspan="9">All Users</th>
+  </tr>
+  <tr>
+	<td></td>
+    <td>Username</td>
+    <td>Email</td>
+	<td>Subscriber</td>
+	<td>Subscriber Until?</td>
+    <td>Donated?</td>
+	<td>Donated On</td>
+    <td>Enabled?</td>
+    <td>Roles</td>
+  </tr>
+  </thead>
+  <tbody>
+    <%= render :partial => 'user', :collection => @users %>
+  </tbody>
+</table>
+

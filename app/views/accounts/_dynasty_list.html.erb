@@ -1,0 +1,32 @@
+<h2 style="text-align: center;"><%= link_to "New Dynasty", "http://#{APP_CONFIG['ncaa_url']}/dynasties/new" %> | <%= link_to "View All Dynasties", "http://#{APP_CONFIG['ncaa_url']}/" %></h2>
+<table>
+	<thead>
+	  <tr>
+		<th colspan="7">
+			Dynasties
+		</th>
+	  </tr>
+      <tr class="labels">
+            <td>School</td>
+            <td>First Year</td>
+            <td>Last Year</td>
+            <td>Record</td>
+            <td>Last Updated (Approx)</td>
+            <td>Created On (Approx)</td>
+			<td></td>
+      </tr>
+	</thead>
+	<tbody>
+	<% current_user.dynasties.each do |dynasty| %>
+	<tr class="<%= cycle("even","odd") %>">
+	<td><%= link_to(dynasty.team.name+'&nbsp;'+dynasty.team.mascot,url_for_dynasty(dynasty,dynasty.seasons.first)) %></td>
+	<td><%= dynasty.first_season.year.to_s unless dynasty.first_season.nil? %></td>
+	<td><%= dynasty.most_recent_season.year.to_s unless dynasty.first_season.nil? %></td>
+	<td><%= dynasty.overall_record %></td>
+	<td><%= dynasty.updated_at.to_s(:avid) %></td>
+	<td><%= dynasty.created_at.to_s(:avid) %></td>
+	<td><%= link_to image_tag("delete.png",:size=>"16x16"), url_for_dynasty(dynasty), :method=>"delete",:confirm=>"Are you sure you want to delete your #{dynasty.team.name} dynasty?" %></td>
+	</tr>
+	<% end %>
+	</tbody>
+</table>

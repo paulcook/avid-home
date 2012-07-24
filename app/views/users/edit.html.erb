@@ -1,0 +1,38 @@
+<div class="yui-gc dynasty_box">
+<div class="yui-u first">
+	<h2>Edit User: <%= @user.login %></h2>
+	<p><%= link_to 'Show Profile', user_path(@user) %></p>
+	<%= error_messages_for :user %>
+ 
+	<% form_for :user, :url => user_url(@user), :html => { :method => :put } do |f| %>
+	  <p>Email:<br /><%= f.text_field :email, :size => 60 %></p>
+	  <p>Subscriber?: <%= f.check_box :subscriber %> <%= f.text_field :subscribed_on, :size=>10 %></p>
+	  <p><%= "Subscriber Until: #{f.text_field :subscriber_until,:size=>10}" if @user.subscriber? %></p>
+	  <p>Donator?: <%= f.check_box :donator %> <%= "Donated On: #{f.text_field :donated_on,:size=>10}" if @user.donator? %></p>
+	  <p>Password:<br /><%= f.password_field :password, :size=>30 %></p>
+	  <p>Password Confirmation:<br /><%= f.password_field :password_confirmation, :size=>30 %></p>
+	<%= submit_tag 'Save' %>
+	<% end %>
+</div>
+<div class="yui-u">
+<h2>User Roles</h2>
+<% form_tag roles_path(@user) do %>
+Add Role: <%= select :role, :name, [["Administrator","administrator"],["Editor","editor"]],:include_blank=>true %> <%= submit_tag "Add" %>
+<% end %>
+<ul>
+<% for role in @user.roles %>
+<li><%= role.name %> <%= link_to(image_tag("icons/16x16/delete_item.png", :size=>"16x16", :alt=>"Remove"),role_path(@user,role),:method=>"delete",:confirm=>"Are you sure you want to remove this role?") %></li>
+<% end %>
+</ul>
+</div>
+</div>
+
+<p><%= link_to "View All Users",users_path %></p>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#user_subscribed_on").datepicker();
+	$("#user_subscriber_until").datepicker();
+	$("#user_donated_on").datepicker();
+});
+</script>

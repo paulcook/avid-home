@@ -1,0 +1,16 @@
+      </td>
+    </tr>
+
+    <tr class="pagefooter">
+        <td align="left" valign="MIDDLE">
+            <% if @page.nil? %>
+                &nbsp;
+            <% else %>
+                <%= @page.updated_at.strftime("Modified on: %a, %d %b, %Y at %H:%M:%S") %> 
+                (<%= @content.size unless @content.nil? %> characters) <%= "by #{@page.editor.username}" unless @page.editor.nil? %>
+				Version: <%= @page.version %>
+            <% end %>
+        </td>
+      <td align="right" valign="MIDDLE"><%= @page.created_at.strftime("Page generated on: %a, %d %b, %Y at %H:%M:%S") %>&nbsp; <%= "by #{@page.creator.username}" unless @page.creator.nil? %></td>
+    </tr>
+</table>

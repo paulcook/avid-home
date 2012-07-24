@@ -1,0 +1,19 @@
+<table width="100%" cellpadding="10" cellspacing="0">
+    <tr class="pageheader" valign="middle">
+        <td align="left">
+            <%= link_to 'home', pages_path %> |
+            <%= link_to 'view', page_path(@pagename) %> |
+            <% if logged_in? and (current_user.is_editor? or current_user.is_administrator?) %>
+				<%= link_to 'edit', edit_page_path(@pagename) %> | 
+				<%= link_to 'help', help_pages_path %>
+			<% end %>
+            <%= link_to 'print', print_page_path(@pagename) %>
+            
+        </td>
+        <td align="right">
+            <strong>Avid Wiki > <%= request.path_parameters['action'] %> > <%= @pagename %></strong>
+        </td>
+  </tr>
+
+    <tr>
+      <td align="left" colspan="2">

@@ -1,0 +1,12 @@
+<%= link_to "Back to Development Page", dev_path %>
+<div class="yui-gc">
+    <div class="yui-u first">
+        <div class="dynasty_box">
+        <h3>Tickets tagged with <%= h (params[:id]) %></h3>
+        <%= render :partial=>"list" %>
+        </div>
+    </div>
+    <div class="yui-u">
+        <%= render :partial=>"tags" %>
+    </div>
+</div>

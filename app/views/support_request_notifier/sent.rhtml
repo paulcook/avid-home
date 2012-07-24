@@ -1,0 +1,7 @@
+A new support request has been received from <%= @support_request.name %>. You can view it <%= link_to "here", "http://#{@url}/support_requests/#{@support_request.id}" %>.
+
+----------------------------MESSAGE----------------------------------------------
+
+<%= sanitize @support_request.message %>
+
+----------------------------END MESSAGE------------------------------------------

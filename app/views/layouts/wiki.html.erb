@@ -1,0 +1,10 @@
+<% @stylesheet_tags = capture do %>
+	<%= stylesheet_link_tag "wiki.css" %>
+<% end %>
+<%= render :file=>"#{APP_CONFIG['support_root']}/layouts/_head.html.erb" %>
+<%= handle_notices %>
+
+<%= yield %>
+
+<%= render :file=>"#{APP_CONFIG['support_root']}/layouts/_foot.html.erb" %>
+

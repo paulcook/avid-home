@@ -1,0 +1,40 @@
+<div class="yui-b dynasty_box">
+	<h2>Avid Help Page</h2>
+</div>
+<div class="yui-g">
+	<div class="yui-u first">
+		<div class="dynasty_box">
+			<h2>Wiki</h2>
+			<% unless @pages.nil? %>
+			<ul>
+			<% for page in @pages %>
+				<% unless page.closed? and (!logged_in? or (logged_in? and !current_user.is_wiki_editor?)) %><li><%= link_to page.name, page_path(page) %><%= ' <span style="color:red">Draft</span>' if page.closed? %></li><% end %>
+			<% end %>
+			</ul>
+			<% else %>
+			<p>No Wiki Pages were found</p>
+			<% end %>
+		</div>
+	</div>
+	<div class="yui-u">
+		<div class="yui-b dynasty_box">
+			<h2>Help Forums</h2>
+			<p><a href="http://www.ncaastrategies.com/utopia/forumdisplay.php?f=124">NCAA Strategies hosts the Avid support forums.  If you are not a member you can register for free and post in the Avid section to get some help.</a>
+				</p>
+		</div>
+		<div class="yui-b dynasty_box">
+		    <h2>Avid Development/Error Reporting</h2>
+		    <p>You can request new features and report bugs/errors at the Avid development site. Submit a ticket regarding your ideas for new features. Submit a ticket if you encounter an error (remember to be specific including URL, dynasty name, section, etc).  Submit a ticket to help get things done.</p>
+		    <p><%= link_to "Avid Development Site",dev_path %></p>
+		</div>
+		<div class="yui-b dynasty_box">
+			<h2>Password Help</h2>
+			<p>If you lost or forgot your password you can click below to initiate resetting the password:<br />
+				<%= link_to "Lost or Forgotten Password?", new_password_path %>
+			</p>
+		</div>
+		<div class="yui-b dynasty_box">
+			<%= render :partial=>"support_requests/form" %>
+		</div>
+	</div>
+</div>

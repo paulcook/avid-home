@@ -1,0 +1,6 @@
+<div class="dynasty_box">
+        <h3>Tags</h3>
+        <% tag_cloud @tags, %w(css1 css2 css3 css4) do |tag, css_class| %>
+        <%= link_to tag.name, tag_ticket_path(tag.name), :class => css_class %>
+        <% end %>
+</div>

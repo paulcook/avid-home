@@ -1,0 +1,13 @@
+<div class="dynasty_box">
+	<h2>Edit Your Preferences</h2>
+	<% form_tag preferences_path(@user),:method=>:put do %>
+	<table class="width-third">
+		<tbody>
+			<% Preferences::OPTIONS.each_key do |option| %>
+			<tr><th class="label"><%= option.to_s.humanize.titleize %></th><td><%= check_box_tag option.to_sym, 1, Preferences.to_bool(current_user.preferences[option.to_sym]) %></td></tr>
+			<% end %>
+			<tr><td colspan="2"><%= submit_tag "Save" %></td></tr>
+		</tbody>
+	</table>
+	<% end %>
+</div>

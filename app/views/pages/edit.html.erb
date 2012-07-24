@@ -1,0 +1,19 @@
+<%= render :partial=>"head" %>
+<% form_tag page_path(@page), :method=>:put do %>
+  <label> 
+  <input type="hidden" name="f" value="<%= @pagename %>">
+  <div align="center"><br />
+      <%= check_box :page,:closed %> Draft?<br />
+      <textarea name="c" rows="20" id="c" style="width:95%"><%= @content %></textarea>
+    <br />
+    <br />
+    <input name="Save" type="submit" value="Save" id="Save">
+    &nbsp;
+    <input name="Reset" type="reset" value="Reset" id="Reset">
+  </div>
+  </label>
+  <label>
+  <div align="center"></div>
+  </label>
+<% end %>
+<%= render :partial=>"foot" %>

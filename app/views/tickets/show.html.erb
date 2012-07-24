@@ -1,0 +1,61 @@
+<%= link_to "Back to Development Page", dev_path %>
+<div class="dynasty_box" id="tickt_box">
+    <h2>Avid Development Ticket #<%= @ticket.id %></h2>
+    <div id="ticket">
+        <h4 style="float:right; margin: 0; border: none;">Status: <%= @ticket.status %></h4>
+        <h3><%= @ticket.ticket_type.capitalize %>: <%= @ticket.title %></h3>
+        <p class="ticket_byline">Created By: <strong><%= @ticket.user.login %></strong> <%= @ticket.created_at.to_formatted_s(:avid_full) %></p>
+        <%= to_html @ticket.body %>
+    </div>
+    
+    <div id="comments">
+    <% if current_user.is_administrator? %>
+    <div id="ticket_admin" style="margin-bottom: 1em;">
+    <% form_tag ticket_path(@ticket),:method=>:put do %>
+    Status: <%= select :ticket, :status, ticket_status_options,:include_blank=>true %> 
+    Type: <%= select :ticket,:ticket_type,ticket_type_options,:include_blank=>true %> 
+    <%= submit_tag "Update" %>    
+    <% end %>
+    </div>
+    <% end %>
+        <%= link_to "Add Comment","#",:id=>"add_comment",:class=>"comment_link" %>
+        <div class="dynasty_box" id="comment_form" style="display:none;">
+            <h3>New Comment</h3>
+            <% form_tag ticket_comments_path(@ticket) do %>
+            <table>
+            <tbody>
+            <tr><td>Title: <%= text_field :comment, :title, :size=>60 %></td></tr>
+            <tr><td>Comment:<br /> <%= text_area :comment, :comment, :cols=>70, :rows=>8 %></td></tr>
+            <tr><td><%= submit_tag "Save" %></td></tr>
+            </tbody>
+            </table>
+            <% end %>
+        </div>
+        <h3>Comments on Ticket <%= @ticket.id %></h3>
+        <% @ticket.comments.each_with_index do |comment,i| %>
+            <div class="comment<%= " admin" if comment.user.login == "mandibal" %>">
+            <h4>Comment #<%= (i+1).to_s %>: <%= comment.title %></h4>
+            <p class="comment_byline">
+            Posted by: <strong><%= comment.user.login %></strong> <%= comment.created_at.to_formatted_s(:avid_full) %> 
+            <% if (comment.user_id == current_user.id) or current_user.is_administrator? %><span class="edit-links" style="display:none;"><%= link_to "Delete",ticket_comment_path(@ticket,comment), :confirm=>"Are you sure you want to delete this comment?", :method=>"delete" %></span><% end %>
+            </p>
+            <%= to_html comment.comment %>
+            </div>
+        <% end %>
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#add_comment").bind("click",function(){
+        $("#comment_form").slideToggle("slow");
+    });
+    
+    $("div.comment").hover(
+    function(){
+        $(this).find("span.edit-links:first").show();
+    },
+    function(){
+        $(this).find("span.edit-links:first").hide();
+    });
+});
+</script>

@@ -1,0 +1,16 @@
+<div class="yui-g">
+<div class="dynasty_box">
+	<h2>Edit Account Details</h2>
+	<p><%= link_to 'Back to Account', accounts_path %></p>
+	<%= error_messages_for :user %>
+ 
+	<% form_for :user, :url => account_path(@user), :html => { :method => :put } do |f| %>
+	  <p>First Name:<br /><%= f.text_field :first_name, :size => 40 %></p>
+	  <p>Last Name:<br /><%= f.text_field :last_name, :size => 40 %></p>
+	  <p>Email:<br /><%= f.text_field :email, :size => 60 %></p>
+	  <p>Password:<br /><%= f.password_field :password, :size=>30 %></p>
+	  <p>Password Confirmation:<br /><%= f.password_field :password_confirmation, :size=>30 %></p>
+	<%= submit_tag 'Save' %>
+	<% end %>
+</div>
+</div>

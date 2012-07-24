@@ -1,0 +1,39 @@
+<div class="dynasty_box">
+<h2>Avid Dynasty Manager Development Site</h2>
+<p>This page exits to facilitate the development of Avid.  You can post bug reports as well as feature requests here. If you have a question and/or are looking for help please use the <%= link_to "forums","http://www.ncaastrategies.com/utopia/forumdisplay.php?f=124" %>.</p>
+</div>
+<div class="yui-g">
+<%= link_to "Create New Ticket","#",:id=>"new_ticket", :style=>"margin-left: 1.5em;" %>
+<div id="new_ticket_form" class="dynasty_box" style="display:none;">
+    <h3>Create New Ticket</h3>
+    <%= render :partial=>"tickets/new" %>
+</div>
+</div>
+<div class="yui-gc">
+    <div class="yui-u first">
+        <div id="tickets_list" class="dynasty_box">
+            <ul class="undecorated">
+            <li><a href="#open_tickets"><span>Open Tickets</span></a></li>
+            <li><a href="#closed_tickets"><span>Closed/Resolved Tickets</span></a></li>
+            </ul>
+            <div id="open_tickets">
+                <%= render :partial=>"tickets/list", :locals=>{:tickets=>@open_tickets} %>
+            </div>
+            <div id="closed_tickets">
+                <%= render :partial=>"tickets/list", :locals=>{:tickets=>@closed_tickets} %>
+            </div>
+        </div>
+    </div>
+    <div class="yui-u">
+        <%= render :partial=>"tickets/tags" %>
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#new_ticket").bind("click",function(){
+        $("#new_ticket_form").slideToggle("slow");
+    });
+    
+    $("#tickets_list > ul").tabs();
+});
+</script>

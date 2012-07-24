@@ -1,0 +1,22 @@
+<div id="home-main" class="yui-g">
+	<div id="sign_up">
+		<h1>Welcome to the Avid Dynasty Manager</h1>
+		<p>This site was created to facilitate the tracking of
+		dynasties played in dynasty mode of the popular
+		NCAA Football video game series produced by
+		EA Sports.</p>
+		
+		<div style="width: 266px; margin: 0.5em auto;">
+		<%= link_to image_tag("sign_up.png", :size=>"266x53", :alt=>"Sign Up"), new_user_path  %>
+		</div>
+	</div>
+	<div id="login">
+		<p>There are already many dynasties on Avid.  Please take a look at how your favorite team is progressing under the guidance of a fellow dynasty enthusiast.</p>
+		<div style="width: 266px; margin: 0.5em auto;">
+		<%= link_to image_tag("view_dynasties.png", :size=>"266x53", :alt=>"View Dynasties"), "http://#{APP_CONFIG['ncaa_url']}/" %>
+		</div>
+		<div style="width: 266px; margin: 1em auto;">
+		<%= link_to image_tag("login.png", :size=>"266x53", :alt=>"Login"), login_path %>
+		</div>
+	</div>
+</div>

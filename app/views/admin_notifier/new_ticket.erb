@@ -1,0 +1,7 @@
+New Ticket Submitted: <%= link_to "#{@ticket.ticket_type} ##{@ticket.id}", "http://"+APP_CONFIG['site_url']+ticket_path(@ticket) %>
+
+Created by <%= @ticket.user.login %> <%= @ticket.created_at(:avid_full) %>
+
+Description:
+<%= @ticket.body %>
+

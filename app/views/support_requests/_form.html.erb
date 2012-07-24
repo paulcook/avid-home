@@ -1,0 +1,42 @@
+<h2>Help Form</h2>
+<p>You can use this form to contact the Avid Staff about issues you are having or with any questions you have that you can't get answered through the wiki pages or support forum. 
+	<strong>Notice: The "Avid Staff" is one person who develops the entire web site in his spare time and offers it as a free service.  In other words, he'll get to the support request
+		 when he can and there is no guarantee that it will be immediate. Please respect this and consider the other support options like the forum if you need immediate help that does not involve
+		 creating a new account. Thanks!</strong></p>
+<% form_tag support_requests_path do %>
+<table>
+	<thead>
+		<tr><td>Your Name</td></tr>
+	</thead>
+	<tbody>
+		<tr><td><%= text_field :support_request, :name %></td></tr>
+	</tbody>
+	<thead>
+		<tr><td>Your Email Address</td></tr>
+	</thead>
+	<tbody>
+		<tr><td><%= text_field :support_request, :email %></td></tr>
+	</tbody>
+	<thead>
+		<tr><td>Your Avid Username (if you have one)</td></tr>
+	</thead>
+	<tbody>
+		<tr><td><%= text_field :support_request, :username %></td></tr>
+	</tbody>
+	<thead>
+		<tr><td>Subject:</td></tr>
+	</thead>
+	<tbody>
+		<tr><td><%= text_field :support_request, :subject %></td></tr>
+	</tbody>
+	<thead>
+		<tr><td>Message</td></tr>
+	</thead>
+	<tbody>
+		<tr><td><%= text_area :support_request, :message,:cols=>50, :rows=>8 %></td></tr>
+	</tbody>
+	<tbody>
+		<tr><td><%= submit_tag "Send" %></td></tr>
+	</tbody>
+</table>
+<% end %>

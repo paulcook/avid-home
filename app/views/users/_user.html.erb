@@ -1,0 +1,20 @@
+<tr class="<%= cycle('odd', 'even') %>">
+  <td><%= link_to "Edit", edit_user_path(user) %></td>
+  <td><%=h user.login %></td>
+  <td><%=h user.email %></td>
+  <td><%= "<strong>X</strong>" if user.subscriber? %></td>
+  <td><%= user.subscriber_until %></td>
+  <td><%= "yes" if user.donator? %></td>
+  <td><%= user.donated_on if user.donator? %></td>
+  <td><%= user.enabled ? 'yes' : 'no' %>
+    <% unless user == current_user %>
+      <% if user.enabled %>
+        <%= link_to('disable', user_path(user.id), :method => :delete) %>
+      <% else %>
+        <%= link_to('enable', enable_user_path(user.id), :method => :put) %>
+      <% end %>
+    <% end %>
+  </td>
+  <td></td>
+</tr>
+

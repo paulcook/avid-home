@@ -1,0 +1,15 @@
+<div class="dynasty_box width-half centered">
+	<h2>News Archive</h2>
+	<% if logged_in? and current_user.is_admin? %><%= link_to "Add News", new_news_item_path %><% end %>
+	<% for item in @news_items do %>
+	<table class="news_item">
+		<thead>
+			<tr><th><%= item.title %></th></tr>
+			<tr><td>Posted: <%= item.created_at.to_s(:long) %><% if logged_in? and current_user.is_admin? %> <%= link_to "Edit", edit_news_item_path(item) %> | <%= link_to "Delete", news_item_path(item), :method=>"delete",:confirm=>"Ok to delete news item?" %><% end %></td></tr>
+		</thead>
+		<tbody>
+			<tr><td><%= item.body %></td></tr>
+		</tbody>
+	</table>
+	<% end %>
+</div>

@@ -1,0 +1,23 @@
+<% form_tag ticket_path(@ticket),:method=>:put do %>
+        <table>
+        <tr>
+            <td>Status: <%= select :ticket,:status,ticket_status_options, :include_blank=>true %></td>
+        </tr>
+        <tr>
+            <td>Ticket Type: <%= select :ticket,:ticket_type,ticket_type_options, :include_blank=>true %></td>
+        </tr>
+        <tr>
+            <td>Title: <%= text_field :ticket,:title,:size=>30,:max_length=>75 %></td>
+        </tr>
+        <tr>
+            <td>Describe the problem or desired feature: (<%= link_to "formatting help","http://hobix.com/textile/",:target=>"_new" %>)<br />
+            <%= text_area :ticket,:body,:rows=>20,:cols=>50 %></td>
+        </tr>
+        <tr>
+            <td>Tags (comma seperated list): <%= text_field :ticket,:tag_list, :size=>50 %></td>
+        </tr>
+        <tr>
+            <td><%= submit_tag "Save" %></td>
+        </tr>
+        </table>
+<% end %>

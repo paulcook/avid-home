@@ -1,0 +1,66 @@
+<% @head_styles = "div#dynasty_menu { width: 11%; }" %>
+<% @title = "Avid: #{@user.login}" %>
+<% for item in @news_items do %>
+	<% dismissible_message("news_items_#{item.id}") do %>
+		<h3><%= item.title %></h3>
+		<%= simple_format(item.body) %>
+	<% end %>
+<% end %>
+
+<div class="yui-main">	
+<div class="yui-b">
+	<div class="with-padding darkgrey" style="font-size: 2em; color: #FFF;">
+		<h1><%=h @user.login.titleize %></h1>
+	</div>
+</div><!-- end top mast -->
+
+<div class="yui-g byline">
+	<% if @user == current_user %>
+	<div id="dynasty_menu">
+		<ul class="sf-menu sf-js-enabled sf-shadow">
+			<li><%= link_to "Account CP", "#" %>
+				<ul>
+					<li><%= link_to "Edit Account Details", edit_account_path(current_user) %></li>
+					<li><%= link_to "Edit Preferences", edit_preferences_path(current_user) %></li>
+					<li><%= link_to "Avid Development/Submit Ticket", dev_path %></li>
+					<% if @user.subscriber? %>
+					<li><%= link_to "Setup Custom Web Site", "http://#{APP_CONFIG['custom_site_url']}" %></li>
+					<% end %>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<% end %>
+</div>
+
+<div class="yui-b">
+	<div id="content-wrapper" class="with-padding grey">
+		<div class="simple-nav">
+			<ul>
+				<% if @user == current_user %><li><strong>Email:</strong> <%= h @user.email %></li><% end %>
+				<li><strong>Joined on:</strong> <%= @user.created_at.to_s(:long) unless @user.created_at.nil? %></li>
+				<% if @user == current_user and @user.subscriber %>
+				<li><strong>Subscriber Since:</strong> <%= @user.subscribed_on %></li>
+				<li><strong>Subscribtion Renewal Date</strong> <%= @user.subscriber_until %> <A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=G8A4L9XP9EZ9N">
+				<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+				</A></li>
+				<% end %>
+			</ul>
+		</div>
+		<% if current_user.is_admin? %>
+		<div class="yui-b">
+			<%= render :partial=>"admin_menu" %>
+		</div>
+		<% end %>
+		<div id="content" class="yui-g">
+		    <div class="yui-u first">
+			    <%= render :partial=>"dynasty_list" %>
+			</div>
+			<div class="yui-u">
+			    <%= render :partial=>"tickets/recent" %>
+			</div>
+    	</div><!-- end content -->
+    </div>
+
+</div>
+</div>

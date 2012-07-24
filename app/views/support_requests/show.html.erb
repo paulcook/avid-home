@@ -1,0 +1,25 @@
+<div class="yui-ge">
+	<div class="yui-u first">
+		<div class="dynasty_box">
+			<h2>Support Request from <%= @support_request.name %></h2>
+			<h4>Email Address: <%= @support_request.email %></h4>
+			<h4>Username: <%= @support_request.username %></h4>
+			<h3>Subject: <%= @support_request.subject %></h3>
+			<%= simple_format sanitize(@support_request.message) %>
+		</div>
+	</div>
+	<div class="yui-u">
+		<div class="dynasty_box">
+			<h2>Support Requests</h2>
+			<% unless @requests.nil? or @requests.empty? %>
+				<ul>
+					<% for request in @requests do  %>
+						<li><%= request.name %> ( <%= request.email %> ) : <%= request.created_at.to_s %></li>
+					<% end %>
+				</ul>
+			<% else %>
+			<p>No requests were submitted.</p>
+			<% end %>
+		</div>
+	</div>
+</div>
