@@ -21,4 +21,8 @@ config.action_controller.perform_caching             = true
 # config.action_mailer.raise_delivery_errors = false
 
 config.action_controller.asset_host  = "assets%d.avidmanager.com"
-ActionController::CgiRequest::DEFAULT_SESSION_OPTIONS.update(:session_domain => ".avidmanager.com")
+if ActionController::Base.session
+  ActionController::Base.session[:domain] = '.avidmanager.com'
+else
+  ActionController::Base.session = { :domain => '.avidmanager.com' }
+end
