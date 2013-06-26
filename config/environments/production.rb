@@ -20,7 +20,7 @@ config.action_controller.perform_caching             = true
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
 
-config.action_controller.asset_host  = "assets%d.avidmanager.com"
+config.action_controller.asset_host  = "assets.avidmanager.com"
 if ActionController::Base.session
   ActionController::Base.session[:domain] = '.avidmanager.com'
 else
