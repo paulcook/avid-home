@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+group :development do
+	gem 'rvm-capistrano'
+	gem 'capistrano'
+end
+
 gem 'rails', '~> 2.3.18'
 gem 'pg'
 
