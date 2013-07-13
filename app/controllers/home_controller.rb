@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
   
-  before_filter :skip_main_page, :only=>:index
   caches_action :index
   
   def index
