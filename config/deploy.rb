@@ -12,7 +12,7 @@ set :repository,  "git@github.com:paulcook/#{application}"
 # If you aren't using Subversion to manage your source code, specify
 # your SCM below:
 set :scm, :git
-set :branch, "master"
+set :branch, "avid-rails23"
 set :deploy_via, :remote_cache
 set :git_shallow_clone, 1
 set :use_sudo, false
