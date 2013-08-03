@@ -16,12 +16,12 @@
 </div>
 <div class="yui-u">
 <h2>User Roles</h2>
-<% form_tag roles_path(@user) do %>
+<% form_tag user_roles_path(@user) do %>
 Add Role: <%= select :role, :name, [["Administrator","administrator"],["Editor","editor"]],:include_blank=>true %> <%= submit_tag "Add" %>
 <% end %>
 <ul>
 <% for role in @user.roles %>
-<li><%= role.name %> <%= link_to(image_tag("icons/16x16/delete_item.png", :size=>"16x16", :alt=>"Remove"),role_path(@user,role),:method=>"delete",:confirm=>"Are you sure you want to remove this role?") %></li>
+<li><%= role.name %> <%= link_to(image_tag("icons/16x16/delete_item.png", :size=>"16x16", :alt=>"Remove"),user_role_path(@user,role),:method=>"delete",:confirm=>"Are you sure you want to remove this role?") %></li>
 <% end %>
 </ul>
 </div>

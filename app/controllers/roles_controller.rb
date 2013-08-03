@@ -25,11 +25,12 @@ class RolesController < ApplicationController
     def destroy
         @user = User.find_by_param(params[:user_id])
         @role = Role.find(params[:id])
-        
-        if @user.has_no_role @role.name
-            flash[:notice] = "Role removed"
-        else
+        @user.has_no_role @role.name
+
+        if @user.has_role? @role.name
             flash[:notice] = "Role was not removed"
+        else
+            flash[:notice] = "Role removed"
         end
         
         redirect_to edit_user_path(@user)

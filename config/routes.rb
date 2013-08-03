@@ -42,7 +42,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :support_requests
   map.resources :pages, :collection=>{:help=>:get},:member=>{:print=>:get}
   
-  map.resources :users, :has_many=>:roles,:member => { :enable => :put },:collection=>{ :search=>:post }
+  map.resources :users, :has_many=>:roles, :member => { :enable => :put },:collection=>{ :search=>:post }
   map.resource :preferences, :path_prefix=>"/:user_id"
   map.resources :accounts, :member=>{:activate=>:get}
   map.resources :roles, :path_prefix=>"/:user_id"
